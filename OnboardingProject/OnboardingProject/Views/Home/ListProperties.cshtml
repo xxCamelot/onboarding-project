@@ -6,3 +6,10 @@
 
 <p>On this page you will see all current properties.</p>
 
+@foreach (var item in ViewBag.propertyList)
+{
+    <div>
+        <a asp-area="" asp-controller="Home" asp-action="PropertyDescription">@item.address</a>
+        <hr />
+    </div>
+}
