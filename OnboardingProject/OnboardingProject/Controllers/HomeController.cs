@@ -23,7 +23,22 @@ namespace OnboardingProject.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddProperty()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateProperty()
+        {
+            return View();
+        }
+
+        public IActionResult ListProperties()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteProperty()
         {
             return View();
         }
