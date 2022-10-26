@@ -24,18 +24,17 @@ namespace OnboardingProject.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 
         public IActionResult AddProperty()
         {
-            
             return View();
         }
 
         public IActionResult UpdateProperty()
         {
+            //propertyList[index] = newProperty;
             return View();
         }
 
@@ -50,6 +49,12 @@ namespace OnboardingProject.Controllers
 
         public IActionResult DeleteProperty()
         {
+            //propertyList.Remove(index);
+
+            propertyList.Add(new PropertyModel("Viale F. Scaduto 10B", 105.7, new DescriptionModel("The house where I live", "La casa dove vivo", "Dom gdzie ja mieszkam"), "Laundry, Fridge, Wi-Fi, Pets, Balcony, TV"));
+            propertyList.Add(new PropertyModel("Via dell'Arsenale 132", 492.2, new DescriptionModel("My old home", "Mia vecchia casa", "Mòj stary dom"), "Fridge, Wi-Fi"));
+
+            ViewBag.propertyList = propertyList;
             return View();
         }
 
