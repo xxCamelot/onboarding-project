@@ -1,4 +1,6 @@
-﻿@{
+﻿@model System.Collections.Generic.List<PropertyModel>
+
+@{
     ViewData["Title"] = "List all Properties";
 }
 
@@ -6,10 +8,10 @@
 
 <p>On this page you will see all current properties.</p>
 
-@foreach (var item in ViewBag.propertyList)
+@foreach (var item in Model)
 {
     <div>
-        <a asp-area="" asp-controller="Home" asp-action="PropertyDescription">@item.address</a>
+        @Html.ActionLink(item.address, "PropertyDescription", "Home", new {propertyID = item.PropertyID })
         <hr />
     </div>
 }

@@ -13,7 +13,7 @@ namespace OnboardingProject.Controllers
 
     public class HomeController : Controller
     {
-        private readonly List<PropertyModel> propertyList = new List<PropertyModel>();
+        
 
         private readonly ILogger<HomeController> _logger;
 
@@ -32,34 +32,61 @@ namespace OnboardingProject.Controllers
             return View();
         }
 
-        public IActionResult UpdateProperty()
+        [HttpPost]
+        public IActionResult AddPropertyMethod([FromForm] PropertyModel property)
         {
-            //propertyList[index] = newProperty;
-            return View();
+            StaticData.propertyList.Add(property);
+            return RedirectToAction("ListProperties");
+        }
+
+        public IActionResult UpdateProperty(int propertyID, int index)
+        {
+            UpdateModel sendPackage = new UpdateModel(propertyID, index);
+            return View(sendPackage);
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePropertyMethod([FromForm] UpdateModel updated)
+        {
+            StaticData.propertyList[0].address = updated.value;
+            switch (updated.index)
+            {
+                case 1:
+                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).address = updated.value;
+                    break;
+                case 2:
+                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
+                    break;
+                case 3:
+                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).surface = Convert.ToDouble(updated.value);
+                    break;
+                case 4:
+                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).services = updated.value;
+                    break;
+            }
+            return RedirectToAction("ListProperties");
         }
 
         public IActionResult ListProperties()
         {
-            propertyList.Add(new PropertyModel("Viale F. Scaduto 10B", 105.7, new DescriptionModel("The house where I live", "La casa dove vivo", "Dom gdzie ja mieszkam"), "Laundry, Fridge, Wi-Fi, Pets, Balcony, TV"));
-            propertyList.Add(new PropertyModel("Via dell'Arsenale 132", 492.2, new DescriptionModel("My old home", "Mia vecchia casa", "Mòj stary dom"), "Fridge, Wi-Fi"));
-
-            ViewBag.propertyList = propertyList;
-            return View();
+            
+            return View(StaticData.propertyList);
         }
 
         public IActionResult DeleteProperty()
         {
-            //propertyList.Remove(index);
-
-            propertyList.Add(new PropertyModel("Viale F. Scaduto 10B", 105.7, new DescriptionModel("The house where I live", "La casa dove vivo", "Dom gdzie ja mieszkam"), "Laundry, Fridge, Wi-Fi, Pets, Balcony, TV"));
-            propertyList.Add(new PropertyModel("Via dell'Arsenale 132", 492.2, new DescriptionModel("My old home", "Mia vecchia casa", "Mòj stary dom"), "Fridge, Wi-Fi"));
-
-            ViewBag.propertyList = propertyList;
-            return View();
+            return View(StaticData.propertyList);
         }
 
-        public IActionResult PropertyDescription()
+        public IActionResult PropertyDescription(int propertyID)
         {
+            PropertyModel property = StaticData.propertyList.Find(property => property.PropertyID.Equals(propertyID));
+            return View(property);
+        }
+
+        public IActionResult DeleteConfirmation(int propertyID)
+        {
+            StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.PropertyID.Equals(propertyID)));
             return View();
         }
 

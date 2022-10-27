@@ -1,15 +1,17 @@
-﻿@{
+﻿@model System.Collections.Generic.List<PropertyModel>
+
+@{
     ViewData["Title"] = "Delete existing Property";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to delete an existing property.</p>
+<p>Select a property to delete it from the list.</p>
 
-@foreach (var item in ViewBag.propertyList)
+@foreach (var item in Model)
 {
     <div>
-        @item.address
+        @Html.ActionLink(item.address, "DeleteConfirmation", "Home", new { propertyID = item.PropertyID })
         <hr />
     </div>
 }

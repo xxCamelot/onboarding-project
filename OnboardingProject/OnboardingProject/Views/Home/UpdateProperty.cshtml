@@ -1,9 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Update existing Property";
+﻿@model UpdateModel
+
+@{
+    ViewData["Title"] = "Update selected value";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to update an existing property.</p>
+<p>Input the new value</p>
 
-
+@using (Html.BeginForm("UpdatePropertyMethod", "Home", FormMethod.Post))
+{
+    <form>
+        <div>
+            <label for="address">New Value:</label>
+            @Html.TextBoxFor(updated => updated.value, new { @type = "text", @size = "40", @placeholder = "Insert value here", @required = "true" })
+        </div>
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+}

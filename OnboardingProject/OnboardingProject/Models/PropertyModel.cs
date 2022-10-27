@@ -4,6 +4,9 @@ namespace OnboardingProject
 {
     public class PropertyModel
     {
+        private static int Number { get; set; }
+        public int PropertyID { get; set; }
+
         public string address { get; set; }
         public double surface { get; set; }
         public DescriptionModel descriptions { get; set; }
@@ -11,10 +14,13 @@ namespace OnboardingProject
 
         public PropertyModel(string a, double su, DescriptionModel d, string se)
         {
-            address = a;
-            surface = su;
-            descriptions = d;
-            services = se;
+            this.address = a;
+            this.surface = su;
+            this.descriptions = d;
+            this.services = se;
+            Number++;
+            this.PropertyID = Number;
+
         }
 
         public PropertyModel() { }
