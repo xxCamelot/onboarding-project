@@ -13,7 +13,7 @@
     <form>
         <div>
             <label for="address">New Value:</label>
-            @Html.TextBoxFor(updated => updated.value, new { @type = "text", @size = "40", @placeholder = "Insert value here", @required = "true" })
+            @Html.TextBoxFor(Model => Model.value, new { @type = "text", @size = "40", @placeholder = "Insert value here", @required = "true" })
         </div>
         <div>
             <input type="submit" value="Submit" />

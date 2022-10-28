@@ -48,7 +48,7 @@ namespace OnboardingProject.Controllers
         [HttpPost]
         public IActionResult UpdatePropertyMethod([FromForm] UpdateModel updated)
         {
-            StaticData.propertyList[0].address = updated.value;
+            
             switch (updated.index)
             {
                 case 1:
@@ -69,7 +69,6 @@ namespace OnboardingProject.Controllers
 
         public IActionResult ListProperties()
         {
-            
             return View(StaticData.propertyList);
         }
 
