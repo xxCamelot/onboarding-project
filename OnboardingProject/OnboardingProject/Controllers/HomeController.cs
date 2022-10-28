@@ -67,28 +67,28 @@ namespace OnboardingProject.Controllers
             switch (updated.index)
             {
                 case 1:
-                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).address = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).address = updated.value;
                     break;
                 case 2:
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
-                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
                             break;
                         case StaticData.Language.Italian:
-                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.italianDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.italianDescription = updated.value;
                             break;
                         case StaticData.Language.Polish:
-                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.polishDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.polishDescription = updated.value;
                             break;
                     }
-                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).description = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).description = updated.value;
                     break;
                 case 3:
-                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).surface = Convert.ToDouble(updated.value);
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).surface = Convert.ToDouble(updated.value);
                     break;
                 case 4:
-                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).services = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).services = updated.value;
                     break;
             }
             return RedirectToAction("ListProperties");
@@ -135,13 +135,13 @@ namespace OnboardingProject.Controllers
 
         public IActionResult PropertyDescription(int propertyID)
         {
-            PropertyModel property = StaticData.propertyList.Find(property => property.PropertyID.Equals(propertyID));
+            PropertyModel property = StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID));
             return View(property);
         }
 
         public IActionResult DeleteConfirmation(int propertyID)
         {
-            StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.PropertyID.Equals(propertyID)));
+            StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID)));
             return View();
         }
 
