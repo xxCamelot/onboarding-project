@@ -35,6 +35,21 @@ namespace OnboardingProject.Controllers
         [HttpPost]
         public IActionResult AddPropertyMethod([FromForm] PropertyModel property)
         {
+            property.descriptions.englishDescription = "[N/A]";
+            property.descriptions.italianDescription = "[N/A]";
+            property.descriptions.polishDescription = "[N/A]";
+            switch (StaticData.activeLanguage)
+            {
+                case StaticData.Language.English:
+                    property.descriptions.englishDescription = property.description;
+                    break;
+                case StaticData.Language.Italian:
+                    property.descriptions.italianDescription = property.description;
+                    break;
+                case StaticData.Language.Polish:
+                    property.descriptions.polishDescription = property.description;
+                    break;
+            }
             StaticData.propertyList.Add(property);
             return RedirectToAction("ListProperties");
         }
@@ -55,7 +70,19 @@ namespace OnboardingProject.Controllers
                     StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).address = updated.value;
                     break;
                 case 2:
-                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
+                    switch (StaticData.activeLanguage)
+                    {
+                        case StaticData.Language.English:
+                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
+                            break;
+                        case StaticData.Language.Italian:
+                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.italianDescription = updated.value;
+                            break;
+                        case StaticData.Language.Polish:
+                            StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).descriptions.polishDescription = updated.value;
+                            break;
+                    }
+                    StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).description = updated.value;
                     break;
                 case 3:
                     StaticData.propertyList.Find(property => property.PropertyID.Equals(updated.propertyID)).surface = Convert.ToDouble(updated.value);
@@ -65,6 +92,35 @@ namespace OnboardingProject.Controllers
                     break;
             }
             return RedirectToAction("ListProperties");
+        }
+
+        public IActionResult ChangeLanguageMethod(int language)
+        {
+            switch (language)
+            {
+                case 0:
+                    StaticData.activeLanguage = StaticData.Language.English;
+                    foreach(var item in StaticData.propertyList)
+                    {
+                        item.description = item.descriptions.englishDescription;
+                    }
+                    break;
+                case 1:
+                    StaticData.activeLanguage = StaticData.Language.Italian;
+                    foreach (var item in StaticData.propertyList)
+                    {
+                        item.description = item.descriptions.italianDescription;
+                    }
+                    break;
+                case 2:
+                    StaticData.activeLanguage = StaticData.Language.Polish;
+                    foreach (var item in StaticData.propertyList)
+                    {
+                        item.description = item.descriptions.polishDescription;
+                    }
+                    break;
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult ListProperties()

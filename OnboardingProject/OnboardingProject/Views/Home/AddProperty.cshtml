@@ -11,11 +11,11 @@
     <form>
         <div>
             <label for="address">Address:</label>
-            @Html.TextBoxFor(property => property.address, new {@type="text", @size="40", @placeholder= "99 Strawberry Lane", @required="true" })
+            @Html.TextBoxFor(property => property.address, new { @type = "text", @size = "40", @placeholder = "99 Strawberry Lane", @required = "true" })
         </div>
         <div>
-            <label for="description">Description (English) :</label>
-            @Html.TextBoxFor(property => property.descriptions.englishDescription, new { @type = "text", @size = "40", @placeholder = "Penthouse with a view", @required = "true" })
+            <label for="description">Description:</label>
+            @Html.TextBoxFor(property => property.description, new { @type = "text", @size = "40", @placeholder = "Penthouse with a view", @required = "true" })
         </div>
         <div>
             <label for="surface">Surface Area (m2):</label>
@@ -25,6 +25,9 @@
             <label for="services">Services:</label>
             @Html.TextBoxFor(property => property.services, new { @type = "text", @size = "40", @placeholder = "Wi-Fi, Laundry, Pool", @required = "true" })
         </div>
+        @Html.HiddenFor(property => property.descriptions.englishDescription)
+        @Html.HiddenFor(property => property.descriptions.italianDescription)
+        @Html.HiddenFor(property => property.descriptions.polishDescription)
         <div>
             <input type="submit" value="Submit" />
         </div>

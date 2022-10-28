@@ -12,14 +12,19 @@ namespace OnboardingProject
         public DescriptionModel descriptions { get; set; }
         public string services { get; set; }
 
+        public string description { get; set; }
+
         public PropertyModel(string a, double su, DescriptionModel d, string se)
         {
             this.address = a;
             this.surface = su;
             this.descriptions = d;
             this.services = se;
+
             Number++;
             this.PropertyID = Number;
+
+            this.description = descriptions.englishDescription;
 
         }
 

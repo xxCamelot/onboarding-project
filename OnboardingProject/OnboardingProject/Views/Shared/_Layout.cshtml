@@ -43,8 +43,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - OnboardingProject - <a asp-area="" asp-controller="Home" asp-action="AddProperty">Add Property</a>
-            - <a asp-area="" asp-controller="Home" asp-action="ListProperties">List Properties</a> - <a asp-area="" asp-controller="Home" asp-action="DeleteProperty">Delete Property</a>
+            &copy; 2022 - OnboardingProject
+            - @Html.ActionLink("English", "ChangeLanguageMethod", "Home", new { language = 0 })
+            - @Html.ActionLink("Italian", "ChangeLanguageMethod", "Home", new { language = 1 })
+            - @Html.ActionLink("Polish", "ChangeLanguageMethod", "Home", new { language = 2 })
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

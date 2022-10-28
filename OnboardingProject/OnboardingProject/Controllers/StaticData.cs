@@ -10,7 +10,17 @@ namespace OnboardingProject.Controllers
 
             new PropertyModel("Viale F. Scaduto 10B", 105.7, new DescriptionModel("The house where I live", "La casa dove vivo", "Dom gdzie ja mieszkam"), "Laundry, Fridge, Wi-Fi, Pets, Balcony, TV"),
             new PropertyModel("Via dell'Arsenale 132", 492.2, new DescriptionModel("My old home", "Mia vecchia casa", "Mòj stary dom"), "Fridge, Wi-Fi")
+
         };
+
+        public enum Language
+        {
+            English,
+            Italian,
+            Polish
+        };
+
+        public static Language activeLanguage = Language.English;
         
     }
 }
