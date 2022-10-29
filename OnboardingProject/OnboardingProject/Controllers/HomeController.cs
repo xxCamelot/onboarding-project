@@ -104,6 +104,10 @@ namespace OnboardingProject.Controllers
                     {
                         item.description = item.descriptions.englishDescription;
                     }
+                    foreach(var item in StaticData.roomList)
+                    {
+                        item.description = item.descriptions.englishDescription;
+                    }
                     break;
                 case 1:
                     StaticData.activeLanguage = StaticData.Language.Italian;
@@ -111,10 +115,18 @@ namespace OnboardingProject.Controllers
                     {
                         item.description = item.descriptions.italianDescription;
                     }
+                    foreach (var item in StaticData.roomList)
+                    {
+                        item.description = item.descriptions.italianDescription;
+                    }
                     break;
                 case 2:
                     StaticData.activeLanguage = StaticData.Language.Polish;
                     foreach (var item in StaticData.propertyList)
+                    {
+                        item.description = item.descriptions.polishDescription;
+                    }
+                    foreach (var item in StaticData.roomList)
                     {
                         item.description = item.descriptions.polishDescription;
                     }
@@ -136,7 +148,26 @@ namespace OnboardingProject.Controllers
         public IActionResult PropertyDescription(int propertyID)
         {
             PropertyModel property = StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID));
-            return View(property);
+
+            List<RoomModel> tempRoomList = new List<RoomModel>();
+            foreach (var item in StaticData.roomList)
+            {
+                if(item.propertyID == property.propertyID) {
+                    tempRoomList.Add(item);
+                }
+            }
+            RoomModel[] rooms = tempRoomList.ToArray();
+
+            PropertyDescriptionModel descriptionPackage = new PropertyDescriptionModel(property, rooms);
+
+            return View(descriptionPackage);
+        }
+
+        public IActionResult RoomDescription(int roomID)
+        {
+            RoomModel room = StaticData.roomList.Find(room => room.roomID.Equals(roomID));
+
+            return View(room);
         }
 
         public IActionResult DeleteConfirmation(int propertyID)

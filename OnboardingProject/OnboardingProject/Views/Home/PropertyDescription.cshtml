@@ -1,4 +1,4 @@
-﻿@model PropertyModel
+﻿@model PropertyDescriptionModel
 
 @{
     ViewData["Title"] = "Property Description";
@@ -9,17 +9,29 @@
 <p>Here is all available info on the selected property.</p>
 
 <div>
-    @Html.ActionLink(@Model.address, "UpdateProperty", "Home", new { propertyID = Model.propertyID, index = 1 })
+    @Html.ActionLink(@Model.property.address, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 1 })
     <hr />
 </div>
 <div>
-    @Html.ActionLink(@Model.description, "UpdateProperty", "Home", new { propertyID = Model.propertyID, index = 2 })
+    @Html.ActionLink(@Model.property.description, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 2 })
     <hr />
 </div>
 <div>
-    @Html.ActionLink(@Model.surface.ToString(), "UpdateProperty", "Home", new { propertyID = Model.propertyID, index = 3 })
+    @Html.ActionLink(@Model.property.surface.ToString(), "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 3 })
     <hr />
 </div>
 <div>
-    @Html.ActionLink(@Model.services, "UpdateProperty", "Home", new { propertyID = Model.propertyID, index = 4 })
+    @Html.ActionLink(@Model.property.services, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 4 })
+    <hr />
 </div>
+
+<p>Rooms in the property:</p>
+
+@foreach(var item in Model.rooms)
+{
+    <div>
+        @Html.ActionLink(item.description, "RoomDescription", "Home", new { roomID = item.roomID })
+        <hr />
+    </div>
+
+}

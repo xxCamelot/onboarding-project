@@ -1,5 +1,6 @@
 ﻿using System;
-namespace OnboardingProject.Models
+
+namespace OnboardingProject
 {
     public class RoomModel
     {
@@ -19,8 +20,7 @@ namespace OnboardingProject.Models
             this.beds = b;
             this.surface = s;
 
-            number++;
-            this.roomID = number;
+            this.roomID = ++number;
 
             this.descriptions = d;
             this.description = descriptions.englishDescription;

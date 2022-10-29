@@ -1,0 +1,22 @@
+﻿@model RoomModel
+
+@{
+    ViewData["Title"] = "Room Description";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Here is all available info on the selected room. Select one to edit it.</p>
+
+<div>
+    @Html.ActionLink(@Model.description, "Index", "Home", new { roomID = Model.roomID, index = 1 })
+    <hr />
+</div>
+<div>
+    @Html.ActionLink(@Model.beds.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 2 })
+    <hr />
+</div>
+<div>
+    @Html.ActionLink(@Model.surface.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 3 })
+    <hr />
+</div>

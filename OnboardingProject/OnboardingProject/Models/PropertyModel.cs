@@ -20,8 +20,7 @@ namespace OnboardingProject
             this.surface = su;
             this.services = se;
 
-            number++;
-            this.propertyID = number;
+            this.propertyID = ++number;
 
             this.descriptions = d;
             this.description = descriptions.englishDescription;
