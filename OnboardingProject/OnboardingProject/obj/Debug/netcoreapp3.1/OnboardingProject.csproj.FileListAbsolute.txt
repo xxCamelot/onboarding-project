@@ -42,3 +42,6 @@
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/RoomDescription.cshtml.g.cs
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/AddRoom.cshtml.g.cs
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/AddRoomSurvey.cshtml.g.cs
+/Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/UpdateRoom.cshtml.g.cs
+/Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/DeleteRoom.cshtml.g.cs
+/Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/DeleteRoomList.cshtml.g.cs

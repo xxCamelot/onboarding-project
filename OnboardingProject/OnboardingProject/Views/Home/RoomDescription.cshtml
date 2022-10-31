@@ -10,16 +10,16 @@
 
 <div>
     <b>Description: </b>
-    @Html.ActionLink(@Model.description, "Index", "Home", new { roomID = Model.roomID, index = 1 })
+    @Html.ActionLink(@Model.description, "UpdateRoom", "Home", new { roomID = Model.roomID, index = 1 })
     <hr />
 </div>
 <div>
     <b>Beds: </b>
-    @Html.ActionLink(@Model.beds.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 2 })
+    @Html.ActionLink(@Model.beds.ToString(), "UpdateRoom", "Home", new { roomID = Model.roomID, index = 2 })
     <hr />
 </div>
 <div>
     <b>Surface (m2): </b>
-    @Html.ActionLink(@Model.surface.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 3 })
+    @Html.ActionLink(@Model.surface.ToString(), "UpdateRoom", "Home", new { roomID = Model.roomID, index = 3 })
     <hr />
 </div>

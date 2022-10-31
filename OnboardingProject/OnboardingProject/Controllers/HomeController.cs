@@ -101,28 +101,65 @@ namespace OnboardingProject.Controllers
             switch (updated.index)
             {
                 case 1:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).address = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).address = updated.value;
                     break;
                 case 2:
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.englishDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.englishDescription = updated.value;
                             break;
                         case StaticData.Language.Italian:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.italianDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.italianDescription = updated.value;
                             break;
                         case StaticData.Language.Polish:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).descriptions.polishDescription = updated.value;
+                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.polishDescription = updated.value;
                             break;
                     }
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).description = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).description = updated.value;
                     break;
                 case 3:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).surface = Convert.ToDouble(updated.value);
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).surface = Convert.ToDouble(updated.value);
                     break;
                 case 4:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.propertyID)).services = updated.value;
+                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).services = updated.value;
+                    break;
+            }
+            return RedirectToAction("ListProperties");
+        }
+
+        public IActionResult UpdateRoom(int roomID, int index)
+        {
+            UpdateModel sendPackage = new UpdateModel(roomID, index);
+            return View(sendPackage);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateRoomMethod([FromForm] UpdateModel updated)
+        {
+
+            switch (updated.index)
+            {
+                case 1:
+                    switch (StaticData.activeLanguage)
+                    {
+                        case StaticData.Language.English:
+                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.englishDescription = updated.value;
+                            break;
+                        case StaticData.Language.Italian:
+                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.italianDescription = updated.value;
+                            break;
+                        case StaticData.Language.Polish:
+                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.polishDescription = updated.value;
+                            break;
+                    }
+                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).description = updated.value;
+                    break;
+                case 2:
+                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).beds = Convert.ToInt32(updated.value);
+                    break;
+                case 3:
+                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).surface = Convert.ToDouble(updated.value);
                     break;
             }
             return RedirectToAction("ListProperties");
@@ -174,11 +211,6 @@ namespace OnboardingProject.Controllers
             return View(StaticData.propertyList);
         }
 
-        public IActionResult DeleteProperty()
-        {
-            return View(StaticData.propertyList);
-        }
-
         public IActionResult PropertyDescription(int propertyID)
         {
             PropertyModel property = StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID));
@@ -200,13 +232,43 @@ namespace OnboardingProject.Controllers
         public IActionResult RoomDescription(int roomID)
         {
             RoomModel room = StaticData.roomList.Find(room => room.roomID.Equals(roomID));
-
             return View(room);
         }
 
-        public IActionResult DeleteConfirmation(int propertyID)
+        public IActionResult DeleteProperty()
         {
-            StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID)));
+            return View(StaticData.propertyList);
+        }
+
+        public IActionResult DeleteRoom()
+        {
+            return View(StaticData.propertyList);
+        }
+
+        public IActionResult DeleteRoomList(int propertyID)
+        {
+            List<RoomModel> tempRoomList = new List<RoomModel>();
+            foreach (var item in StaticData.roomList)
+            {
+                if (item.propertyID == propertyID)
+                {
+                    tempRoomList.Add(item);
+                }
+            }
+            return View(tempRoomList);
+        }
+
+        public IActionResult DeleteConfirmation(int ID, int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.propertyID.Equals(ID)));
+                    break;
+                case 2:
+                    StaticData.roomList.Remove(StaticData.roomList.Find(room => room.roomID.Equals(ID)));
+                    break;
+            }
             return View();
         }
 

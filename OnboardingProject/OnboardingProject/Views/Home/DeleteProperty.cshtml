@@ -11,7 +11,7 @@
 @foreach (var item in Model)
 {
     <div>
-        @Html.ActionLink(item.address, "DeleteConfirmation", "Home", new { propertyID = item.propertyID })
+        @Html.ActionLink(item.address, "DeleteConfirmation", "Home", new { ID = item.propertyID , index = 1})
         <hr />
     </div>
 }
