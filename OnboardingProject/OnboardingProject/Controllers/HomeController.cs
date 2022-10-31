@@ -54,6 +54,40 @@ namespace OnboardingProject.Controllers
             return RedirectToAction("ListProperties");
         }
 
+        public IActionResult AddRoom()
+        {
+            return View(StaticData.propertyList);
+        }
+
+        public IActionResult AddRoomSurvey(int propertyID)
+        {
+            StaticData.propertyAddedTo = propertyID;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRoomSurveyMethod([FromForm] RoomModel room)
+        {
+            room.descriptions.englishDescription = "[N/A]";
+            room.descriptions.italianDescription = "[N/A]";
+            room.descriptions.polishDescription = "[N/A]";
+            room.propertyID = StaticData.propertyAddedTo;
+            switch (StaticData.activeLanguage)
+            {
+                case StaticData.Language.English:
+                    room.descriptions.englishDescription = room.description;
+                    break;
+                case StaticData.Language.Italian:
+                    room.descriptions.italianDescription = room.description;
+                    break;
+                case StaticData.Language.Polish:
+                    room.descriptions.polishDescription = room.description;
+                    break;
+            }
+            StaticData.roomList.Add(room);
+            return RedirectToAction("ListProperties");
+        }
+
         public IActionResult UpdateProperty(int propertyID, int index)
         {
             UpdateModel sendPackage = new UpdateModel(propertyID, index);

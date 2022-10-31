@@ -9,23 +9,27 @@
 <p>Here is all available info on the selected property.</p>
 
 <div>
+    <b>Address: </b>
     @Html.ActionLink(@Model.property.address, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 1 })
     <hr />
 </div>
 <div>
+    <b>Description: </b>
     @Html.ActionLink(@Model.property.description, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 2 })
     <hr />
 </div>
 <div>
+    <b>Surface Area (m2): </b>
     @Html.ActionLink(@Model.property.surface.ToString(), "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 3 })
     <hr />
 </div>
 <div>
+    <b>Services: </b>
     @Html.ActionLink(@Model.property.services, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 4 })
     <hr />
 </div>
 
-<p>Rooms in the property:</p>
+<p>Rooms in the property: </p>
 
 @foreach(var item in Model.rooms)
 {

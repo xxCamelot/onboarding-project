@@ -7,7 +7,7 @@ namespace OnboardingProject
         private static int number { get; set; }
         public int roomID { get; set; }
 
-        public int propertyID { get; }
+        public int propertyID { get; set; }
         public int beds { get; set; }
         public double surface { get; set; }
 

@@ -1,0 +1,36 @@
+﻿@model RoomModel
+
+@{
+    ViewData["Title"] = "Add new Room";
+}
+
+
+@using (Html.BeginForm("AddRoomSurveyMethod", "Home", FormMethod.Post))
+{
+    <form>
+        <div>
+            <label for="address">Description:</label>
+            @Html.TextBoxFor(room => room.description, new { @type = "text", @size = "40", @placeholder = "Master Bedroom", @required = "true" })
+        </div>
+        <div>
+            <label for="description">Number of beds:</label>
+            @Html.TextBoxFor(room => room.beds, new { @type = "text", @size = "40", @placeholder = "4", @required = "true" })
+        </div>
+        <div>
+            <label for="surface">Surface Area (m2):</label>
+            @Html.TextBoxFor(room => room.surface, new { @type = "text", @size = "40", @placeholder = "107.4", @required = "true" })
+        </div>
+        @Html.HiddenFor(room => room.descriptions.englishDescription)
+        @Html.HiddenFor(room => room.descriptions.italianDescription)
+        @Html.HiddenFor(room => room.descriptions.polishDescription)
+        @Html.HiddenFor(room => room.propertyID)
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+}
+
+
+
+
+

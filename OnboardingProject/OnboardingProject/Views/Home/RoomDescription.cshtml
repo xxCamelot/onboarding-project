@@ -9,14 +9,17 @@
 <p>Here is all available info on the selected room. Select one to edit it.</p>
 
 <div>
+    <b>Description: </b>
     @Html.ActionLink(@Model.description, "Index", "Home", new { roomID = Model.roomID, index = 1 })
     <hr />
 </div>
 <div>
+    <b>Beds: </b>
     @Html.ActionLink(@Model.beds.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 2 })
     <hr />
 </div>
 <div>
+    <b>Surface (m2): </b>
     @Html.ActionLink(@Model.surface.ToString(), "Index", "Home", new { roomID = Model.roomID, index = 3 })
     <hr />
 </div>

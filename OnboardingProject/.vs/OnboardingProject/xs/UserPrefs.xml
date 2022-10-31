@@ -1,11 +1,9 @@
 ﻿<Properties StartupConfiguration="{D1410D1F-BDE7-4355-BDB7-3AC3FE6650FC}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.OnboardingProject PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="OnboardingProject/Views/Home/RoomDescription.cshtml">
     <Files>
       <File FileName="OnboardingProject/Models/PropertyModel.cs" Line="34" Column="1" />
@@ -37,4 +35,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.OnboardingProject PreferredExecutionTarget="/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
 </Properties>
