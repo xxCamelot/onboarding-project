@@ -1,0 +1,70 @@
+﻿@model TableModel
+
+<div class="row">
+    <table class="arrowes-table table-striped">
+        <thead>
+            <tr>
+                <th>Property Address</th>
+                <th>Property Description</th>
+                <th>Surface Area (m2)</th>
+                <th>Services</th>
+                <th>Room Description</th>
+                <th>Room Surface Area (m2)</th>
+                <th>Beds in Room</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var property in Model.properties)
+            {
+                <tr>
+                    <td>
+                        @property.address
+                    </td>
+                    <td>
+                        @property.description
+                    </td>
+                    <td>
+                        @property.surface
+                    </td>
+                    <td>
+                        @property.services
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            @foreach (var item in Model.rooms)
+                            {
+                                if (item.propertyID == property.propertyID)
+                                {
+                                    <li>@item.description</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            @foreach (var item in Model.rooms)
+                            {
+                                if (item.propertyID == property.propertyID)
+                                {
+                                    <li>@item.surface</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled">
+                            @foreach (var item in Model.rooms)
+                            {
+                                if (item.propertyID == property.propertyID)
+                                {
+                                    <li>@item.beds</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

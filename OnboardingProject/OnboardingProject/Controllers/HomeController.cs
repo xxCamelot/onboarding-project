@@ -272,6 +272,14 @@ namespace OnboardingProject.Controllers
             return View();
         }
 
+
+        public IActionResult PropertyTable()
+        {
+            TableModel tablePackage = new TableModel(StaticData.propertyList.ToArray(), StaticData.roomList.ToArray());
+            return View(tablePackage);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -45,3 +45,4 @@
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/UpdateRoom.cshtml.g.cs
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/DeleteRoom.cshtml.g.cs
 /Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/DeleteRoomList.cshtml.g.cs
+/Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/obj/Debug/netcoreapp3.1/Razor/Views/Home/PropertyTable.cshtml.g.cs
