@@ -4,16 +4,23 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="OnboardingProject/Views/Home/WeatherPage.cshtml">
+    <Files>
+      <File FileName="OnboardingProject/Models/OpenWeatherResponse.cs" Line="10" Column="2" />
+      <File FileName="OnboardingProject/Controllers/HomeController.cs" Line="298" Column="35" />
+      <File FileName="OnboardingProject/Views/Shared/_Layout.cshtml" Line="45" Column="15" />
+      <File FileName="OnboardingProject/Controllers/StaticData.cs" Line="36" Column="47" />
+      <File FileName="OnboardingProject/Models/Class.cs" Line="33" Column="6" />
+      <File FileName="OnboardingProject/Views/Home/WeatherPage.cshtml" Line="26" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="OnboardingProject" expanded="True">
             <Node name="OnboardingProject" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="TableModel.cs" selected="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />

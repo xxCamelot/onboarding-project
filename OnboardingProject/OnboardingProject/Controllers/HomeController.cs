@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using OnboardingProject;
 using OnboardingProject.Models;
 
@@ -273,12 +279,48 @@ namespace OnboardingProject.Controllers
         }
 
 
+
         public IActionResult PropertyTable()
         {
             TableModel tablePackage = new TableModel(StaticData.propertyList.ToArray(), StaticData.roomList.ToArray());
             return View(tablePackage);
         }
 
+
+
+        public IActionResult WeatherPage(OpenWeatherMap openWeatherMap)
+        {
+            openWeatherMap = new OpenWeatherMap();
+
+            // Calling API http://openweathermap.org/api
+
+            string apiKey = "ce9b3d4f0ac2ad292fa4277f74e1c29e";
+            string city = "Palermo";
+            HttpWebRequest apiRequest =
+            WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" +
+            city + "&appid=" + apiKey + "&units=metric") as HttpWebRequest;
+
+            string apiResponse = "";
+            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+            {
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                apiResponse = reader.ReadToEnd();
+            }
+
+            ResponseWeather rootObject = JsonConvert.DeserializeObject<ResponseWeather>(apiResponse);
+
+            List<string> sb = new List<string>();
+            sb.Add(rootObject.name);
+            sb.Add(rootObject.sys.country);
+            sb.Add(rootObject.wind.speed.ToString());
+            sb.Add(rootObject.main.temp.ToString());
+            sb.Add(rootObject.main.humidity.ToString());
+            sb.Add(rootObject.weather[0].description);
+
+            openWeatherMap.apiResponse = sb.ToArray();
+
+            return View(openWeatherMap);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

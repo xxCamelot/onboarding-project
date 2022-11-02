@@ -1,0 +1,25 @@
+﻿@model OpenWeatherMap
+
+@{
+    ViewData["Title"] = "Weather in Palermo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>On this page you will see all current properties.</p>
+
+<div>
+    <hr />
+    <b>Region: </b>@Model.apiResponse[0]
+    <hr />
+    <b>Country: </b>@Model.apiResponse[1]
+    <hr />
+    <b>Wind Speed: </b>@Model.apiResponse[2]
+    <hr />
+    <b>Temperature: </b>@Model.apiResponse[3]
+    <hr />
+    <b>Humidity: </b>@Model.apiResponse[4]
+    <hr />
+    <b>Weather: </b>@Model.apiResponse[5]
+    <hr />
+</div>
