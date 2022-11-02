@@ -11,6 +11,8 @@
                 <th>Room Description</th>
                 <th>Room Surface Area (m2)</th>
                 <th>Beds in Room</th>
+                <th>Delete Room</th>
+                <th>Delete Property</th>
             </tr>
         </thead>
 
@@ -18,50 +20,64 @@
             @foreach (var property in Model.properties)
             {
                 <tr>
-                    <td>
-                        @property.address
+                    <td width="21%">
+                        @Html.ActionLink(property.address, "UpdateProperty", "Home", new { propertyID = property.propertyID, index = 1 })
                     </td>
-                    <td>
-                        @property.description
+                    <td width="14%">
+                        @Html.ActionLink(property.description, "UpdateProperty", "Home", new { propertyID = property.propertyID, index = 2 })
                     </td>
-                    <td>
-                        @property.surface
+                    <td width="5%">
+                        @Html.ActionLink(property.surface.ToString(), "UpdateProperty", "Home", new { propertyID = property.propertyID, index = 3 })
                     </td>
-                    <td>
-                        @property.services
+                    <td width="17%">
+                        @Html.ActionLink(property.services, "UpdateProperty", "Home", new { propertyID = property.propertyID, index = 4 })
                     </td>
-                    <td>
+                    <td width="18%">
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
                                 if (item.propertyID == property.propertyID)
                                 {
-                                    <li>@item.description</li>
+                                    <li>@Html.ActionLink(@item.description, "UpdateRoom", "Home", new { roomID = item.roomID, index = 1 })</li>
                                 }
                             }
                         </ul>
                     </td>
-                    <td>
+                    <td width="10%">
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
                                 if (item.propertyID == property.propertyID)
                                 {
-                                    <li>@item.surface</li>
+                                    <li>@Html.ActionLink(@item.surface.ToString(), "UpdateRoom", "Home", new { roomID = item.roomID, index = 3 })</li>
                                 }
                             }
                         </ul>
                     </td>
-                    <td>
+                    <td width="5%">
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
                                 if (item.propertyID == property.propertyID)
                                 {
-                                    <li>@item.beds</li>
+                                    <li>@Html.ActionLink(@item.beds.ToString(), "UpdateRoom", "Home", new { roomID = item.roomID, index = 2 })</li>
                                 }
                             }
                         </ul>
+                    </td>
+                    <td width="5%">
+                        <ul class="list-unstyled">
+                            @foreach (var item in Model.rooms)
+                            {
+                                if (item.propertyID == property.propertyID)
+                                {
+                                    <li>@Html.ActionLink("X", "DeleteConfirmation", "Home", new { ID = item.roomID, index = 2 })</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                    <td width="5%">
+                        @Html.ActionLink("X", "DeleteConfirmation", "Home", new { ID = property.propertyID, index = 1 })
                     </td>
                 </tr>
             }
