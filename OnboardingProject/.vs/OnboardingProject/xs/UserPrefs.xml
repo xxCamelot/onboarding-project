@@ -4,24 +4,16 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="OnboardingProject/Views/Home/RoomDescription.cshtml">
-    <Files>
-      <File FileName="OnboardingProject/Models/PropertyModel.cs" Line="34" Column="1" />
-      <File FileName="OnboardingProject/Models/RoomModel.cs" Line="23" Column="36" />
-      <File FileName="OnboardingProject/Controllers/StaticData.cs" Line="16" Column="71" />
-      <File FileName="OnboardingProject/Controllers/HomeController.cs" Line="171" Column="10" />
-      <File FileName="OnboardingProject/Models/PropertyDescriptionModel.cs" Line="12" Column="28" />
-      <File FileName="OnboardingProject/Views/Home/PropertyDescription.cshtml" Line="10" Column="1" />
-      <File FileName="OnboardingProject/Views/Home/ListProperties.cshtml" Line="4" Column="47" />
-      <File FileName="OnboardingProject/Views/Home/RoomDescription.cshtml" Line="9" Column="75" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="OnboardingProject" expanded="True">
             <Node name="OnboardingProject" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="TableModel.cs" selected="True" />
+              </Node>
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />
