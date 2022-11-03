@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/camelot/.dotnet/store/|arch|/|tfm|",
-      "/Users/camelot/.nuget/packages"
+      "C:\\Users\\camillo.gregorio\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\camillo.gregorio\\.nuget\\packages"
     ]
   }
 }

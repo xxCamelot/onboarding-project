@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "KwlBvlbVAnl+tKJHhkkudQgmujF0VHlZmeUuEDSrYrIqprlPFYqFPTdfVPyZam04Zg3i/bgXCkagDNuLNQY1oA==",
+  "dgSpecHash": "xZZQmwuRcTuJwotVmwqbkzW5Bc3/7UnmAZKvEcjMfO9KWvRQZ7aU1hs0dPUpRpqET3hpFzRtVD60VLX7ZGHUCw==",
   "success": true,
-  "projectFilePath": "/Users/camelot/Documents/GitHub/onboarding-project/OnboardingProject/OnboardingProject/OnboardingProject.csproj",
+  "projectFilePath": "C:\\Users\\camillo.gregorio\\Documents\\GitHub\\onboarding-project\\OnboardingProject\\OnboardingProject\\OnboardingProject.csproj",
   "expectedPackageFiles": [
-    "/Users/camelot/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\camillo.gregorio\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }
