@@ -8,6 +8,10 @@ namespace OnboardingProject.Controllers
     {
         public virtual DbSet<PropertyDataModel> Property { get; set; }
 
+        public PropertyDBContext(DbContextOptions<PropertyDBContext> options) : base(options) { }
+
+
+        /*
         private string _conn = "";
         public PropertyDBContext(string conn)
         {
@@ -19,7 +23,6 @@ namespace OnboardingProject.Controllers
             optionsBuilder.UseSqlServer(_conn);
         }
 
-        /*
         protected void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PropertyDataModel>(entity =>

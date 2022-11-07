@@ -59,7 +59,7 @@ namespace OnboardingProject.Controllers
                     property.PolishDescription = property.Description;
                     break;
             }
-            propertyDBContext.Add(property);
+            propertyDBContext.Property.Add(property);
             return RedirectToAction("ListProperties");
         }
 
@@ -217,7 +217,7 @@ namespace OnboardingProject.Controllers
 
         public IActionResult ListProperties()
         {
-            return View(propertyDBContext.Property);
+            return View(propertyDBContext.Property.ToList());
         }
 
         public IActionResult PropertyDescription(int propertyID)
@@ -246,12 +246,12 @@ namespace OnboardingProject.Controllers
 
         public IActionResult DeleteProperty()
         {
-            return View(propertyDBContext.Property);
+            return View(propertyDBContext.Property.ToList());
         }
 
         public IActionResult DeleteRoom()
         {
-            return View(propertyDBContext.Property);
+            return View(propertyDBContext.Property.ToList());
         }
 
         public IActionResult DeleteRoomList(int propertyID)
