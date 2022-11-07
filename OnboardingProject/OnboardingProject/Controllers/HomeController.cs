@@ -60,12 +60,13 @@ namespace OnboardingProject.Controllers
                     break;
             }
             propertyDBContext.Property.Add(property);
+            propertyDBContext.SaveChanges();
             return RedirectToAction("ListProperties");
         }
 
         public IActionResult AddRoom()
         {
-            return View(propertyDBContext.Property);
+            return View(propertyDBContext.Property.ToList());
         }
 
         public IActionResult AddRoomSurvey(int propertyID)
@@ -111,29 +112,37 @@ namespace OnboardingProject.Controllers
             {
                 case 1:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Address = updated.value;
+                    propertyDBContext.SaveChanges();
                     break;
                 case 2:
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).EnglishDescription = updated.value;
+                            propertyDBContext.SaveChanges();
                             break;
                         case StaticData.Language.Italian:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).ItalianDescription = updated.value;
+                            propertyDBContext.SaveChanges();
                             break;
                         case StaticData.Language.Polish:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).PolishDescription = updated.value;
+                            propertyDBContext.SaveChanges();
                             break;
                     }
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Description = updated.value;
+                    propertyDBContext.SaveChanges();
                     break;
                 case 3:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Surface = Convert.ToDouble(updated.value);
+                    propertyDBContext.SaveChanges();
                     break;
                 case 4:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Services = updated.value;
+                    propertyDBContext.SaveChanges();
                     break;
             }
+            
             return RedirectToAction("ListProperties");
         }
 
@@ -183,6 +192,7 @@ namespace OnboardingProject.Controllers
                     foreach(var item in propertyDBContext.Property)
                     {
                         item.Description = item.EnglishDescription;
+                        propertyDBContext.SaveChanges();
                     }
                     foreach(var item in StaticData.roomList)
                     {
@@ -194,6 +204,7 @@ namespace OnboardingProject.Controllers
                     foreach (var item in propertyDBContext.Property)
                     {
                         item.Description = item.ItalianDescription;
+                        propertyDBContext.SaveChanges();
                     }
                     foreach (var item in StaticData.roomList)
                     {
@@ -205,6 +216,7 @@ namespace OnboardingProject.Controllers
                     foreach (var item in propertyDBContext.Property)
                     {
                         item.Description = item.PolishDescription;
+                        propertyDBContext.SaveChanges();
                     }
                     foreach (var item in StaticData.roomList)
                     {
@@ -273,6 +285,7 @@ namespace OnboardingProject.Controllers
             {
                 case 1:
                     propertyDBContext.Property.Remove(propertyDBContext.Property.FirstOrDefault(x => x.Id == ID));
+                    propertyDBContext.SaveChanges();
                     break;
                 case 2:
                     StaticData.roomList.Remove(StaticData.roomList.Find(room => room.roomID.Equals(ID)));
