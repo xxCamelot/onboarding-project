@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnboardingProject.Controllers;
 
 namespace OnboardingProject
 {
@@ -28,7 +29,7 @@ namespace OnboardingProject
 
             services.AddDbContext<PropertyDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetSection("Server=LAPTOP-GKCBQM4C;Database=TestDatabase;Trusted_Connection=True;").Value);
+                options.UseSqlServer(Configuration.GetSection("YourConn").Value);
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
         }

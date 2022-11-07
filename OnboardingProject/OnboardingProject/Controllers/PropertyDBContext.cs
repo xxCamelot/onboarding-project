@@ -8,17 +8,18 @@ namespace OnboardingProject.Controllers
     {
         public virtual DbSet<PropertyDataModel> Property { get; set; }
 
-        /*
+        private string _conn = "";
+        public PropertyDBContext(string conn)
+        {
+            _conn = conn;
+        }
+        public PropertyDBContext(DbContextOptions<PropertyDBContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=SchoolDB;Trusted_Connection=True;");
-            }
+            optionsBuilder.UseSqlServer(_conn);
         }
-        */
 
-        //override??
+        /*
         protected void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PropertyDataModel>(entity =>
@@ -34,5 +35,6 @@ namespace OnboardingProject.Controllers
             }
             );
         }
+        */
     }
 }

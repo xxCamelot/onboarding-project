@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OnboardingProject;
@@ -19,14 +20,14 @@ namespace OnboardingProject.Controllers
 
     public class HomeController : Controller
     {
-        
-
+        private readonly PropertyDBContext propertyDBContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(PropertyDBContext propertyDBContext, ILogger<HomeController> logger)
         {
+            this.propertyDBContext = propertyDBContext;
             _logger = logger;
-        }
+        }   
 
         public IActionResult Index()
         {
@@ -74,7 +75,8 @@ namespace OnboardingProject.Controllers
         [HttpPost]
         public IActionResult AddRoomSurveyMethod([FromForm] RoomModel room)
         {
-            room.descriptions.englishDescription = "[N/A]";
+            PropertyDataModel prop = propertyDBContext.Property.FirstOrDefault(x => x.Id == room.propertyID);
+            room.descriptions.englishDescription = prop.EnglishDescription;
             room.descriptions.italianDescription = "[N/A]";
             room.descriptions.polishDescription = "[N/A]";
             room.propertyID = StaticData.propertyAddedTo;

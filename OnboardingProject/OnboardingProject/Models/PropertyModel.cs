@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 
 namespace OnboardingProject
 {
@@ -30,14 +29,5 @@ namespace OnboardingProject
 
         public PropertyModel() { }
     }
-
-    /*
-    public class PropertyDBContext : DbContext
-    {
-        public PropertyDBContext() { }
-
-        public DbSet<PropertyModel> properties { get; set; }
-    }
-    */
 }
 

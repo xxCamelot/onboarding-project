@@ -18,7 +18,7 @@
             this.Address = a;
             this.Services = s;
             this.Description = d;
-            this.surface = su;
+            this.Surface = su;
             this.EnglishDescription = ed;
             this.ItalianDescription = itd;
             this.PolishDescription = pd;
