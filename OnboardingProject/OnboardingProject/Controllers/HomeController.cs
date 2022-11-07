@@ -10,10 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OnboardingProject;
 using OnboardingProject.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace OnboardingProject.Controllers
 {
@@ -40,30 +42,30 @@ namespace OnboardingProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPropertyMethod([FromForm] PropertyModel property)
+        public IActionResult AddPropertyMethod([FromForm] PropertyDataModel property)
         {
-            property.descriptions.englishDescription = "[N/A]";
-            property.descriptions.italianDescription = "[N/A]";
-            property.descriptions.polishDescription = "[N/A]";
+            property.EnglishDescription = "[N/A]";
+            property.ItalianDescription = "[N/A]";
+            property.PolishDescription = "[N/A]";
             switch (StaticData.activeLanguage)
             {
                 case StaticData.Language.English:
-                    property.descriptions.englishDescription = property.description;
+                    property.EnglishDescription = property.Description;
                     break;
                 case StaticData.Language.Italian:
-                    property.descriptions.italianDescription = property.description;
+                    property.ItalianDescription = property.Description;
                     break;
                 case StaticData.Language.Polish:
-                    property.descriptions.polishDescription = property.description;
+                    property.PolishDescription = property.Description;
                     break;
             }
-            StaticData.propertyList.Add(property);
+            propertyDBContext.Add(property);
             return RedirectToAction("ListProperties");
         }
 
         public IActionResult AddRoom()
         {
-            return View(StaticData.propertyList);
+            return View(propertyDBContext.Property);
         }
 
         public IActionResult AddRoomSurvey(int propertyID)
@@ -75,8 +77,7 @@ namespace OnboardingProject.Controllers
         [HttpPost]
         public IActionResult AddRoomSurveyMethod([FromForm] RoomModel room)
         {
-            PropertyDataModel prop = propertyDBContext.Property.FirstOrDefault(x => x.Id == room.propertyID);
-            room.descriptions.englishDescription = prop.EnglishDescription;
+            room.descriptions.englishDescription = "[N/A]";
             room.descriptions.italianDescription = "[N/A]";
             room.descriptions.polishDescription = "[N/A]";
             room.propertyID = StaticData.propertyAddedTo;
@@ -109,28 +110,28 @@ namespace OnboardingProject.Controllers
             switch (updated.index)
             {
                 case 1:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).address = updated.value;
+                    propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Address = updated.value;
                     break;
                 case 2:
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.englishDescription = updated.value;
+                            propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).EnglishDescription = updated.value;
                             break;
                         case StaticData.Language.Italian:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.italianDescription = updated.value;
+                            propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).ItalianDescription = updated.value;
                             break;
                         case StaticData.Language.Polish:
-                            StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).descriptions.polishDescription = updated.value;
+                            propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).PolishDescription = updated.value;
                             break;
                     }
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).description = updated.value;
+                    propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Description = updated.value;
                     break;
                 case 3:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).surface = Convert.ToDouble(updated.value);
+                    propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Surface = Convert.ToDouble(updated.value);
                     break;
                 case 4:
-                    StaticData.propertyList.Find(property => property.propertyID.Equals(updated.ID)).services = updated.value;
+                    propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Services = updated.value;
                     break;
             }
             return RedirectToAction("ListProperties");
@@ -179,9 +180,9 @@ namespace OnboardingProject.Controllers
             {
                 case 0:
                     StaticData.activeLanguage = StaticData.Language.English;
-                    foreach(var item in StaticData.propertyList)
+                    foreach(var item in propertyDBContext.Property)
                     {
-                        item.description = item.descriptions.englishDescription;
+                        item.Description = item.EnglishDescription;
                     }
                     foreach(var item in StaticData.roomList)
                     {
@@ -190,9 +191,9 @@ namespace OnboardingProject.Controllers
                     break;
                 case 1:
                     StaticData.activeLanguage = StaticData.Language.Italian;
-                    foreach (var item in StaticData.propertyList)
+                    foreach (var item in propertyDBContext.Property)
                     {
-                        item.description = item.descriptions.italianDescription;
+                        item.Description = item.ItalianDescription;
                     }
                     foreach (var item in StaticData.roomList)
                     {
@@ -201,9 +202,9 @@ namespace OnboardingProject.Controllers
                     break;
                 case 2:
                     StaticData.activeLanguage = StaticData.Language.Polish;
-                    foreach (var item in StaticData.propertyList)
+                    foreach (var item in propertyDBContext.Property)
                     {
-                        item.description = item.descriptions.polishDescription;
+                        item.Description = item.PolishDescription;
                     }
                     foreach (var item in StaticData.roomList)
                     {
@@ -216,17 +217,17 @@ namespace OnboardingProject.Controllers
 
         public IActionResult ListProperties()
         {
-            return View(StaticData.propertyList);
+            return View(propertyDBContext.Property);
         }
 
         public IActionResult PropertyDescription(int propertyID)
         {
-            PropertyModel property = StaticData.propertyList.Find(property => property.propertyID.Equals(propertyID));
+            PropertyDataModel property = propertyDBContext.Property.FirstOrDefault(x => x.Id == propertyID);
 
             List<RoomModel> tempRoomList = new List<RoomModel>();
             foreach (var item in StaticData.roomList)
             {
-                if(item.propertyID == property.propertyID) {
+                if(item.propertyID == property.Id) {
                     tempRoomList.Add(item);
                 }
             }
@@ -245,12 +246,12 @@ namespace OnboardingProject.Controllers
 
         public IActionResult DeleteProperty()
         {
-            return View(StaticData.propertyList);
+            return View(propertyDBContext.Property);
         }
 
         public IActionResult DeleteRoom()
         {
-            return View(StaticData.propertyList);
+            return View(propertyDBContext.Property);
         }
 
         public IActionResult DeleteRoomList(int propertyID)
@@ -271,7 +272,7 @@ namespace OnboardingProject.Controllers
             switch (index)
             {
                 case 1:
-                    StaticData.propertyList.Remove(StaticData.propertyList.Find(property => property.propertyID.Equals(ID)));
+                    propertyDBContext.Property.Remove(propertyDBContext.Property.FirstOrDefault(x => x.Id == ID));
                     break;
                 case 2:
                     StaticData.roomList.Remove(StaticData.roomList.Find(room => room.roomID.Equals(ID)));
@@ -284,7 +285,7 @@ namespace OnboardingProject.Controllers
 
         public IActionResult PropertyTable()
         {
-            TableModel tablePackage = new TableModel(StaticData.propertyList.ToArray(), StaticData.roomList.ToArray());
+            TableModel tablePackage = new TableModel(propertyDBContext.Property.ToArray(), StaticData.roomList.ToArray());
             return View(tablePackage);
         }
 

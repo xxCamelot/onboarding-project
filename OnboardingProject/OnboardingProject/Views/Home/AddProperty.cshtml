@@ -1,4 +1,4 @@
-﻿@model PropertyModel
+﻿@model PropertyDataModel
 
 @{
     ViewData["Title"] = "Add new Property";
@@ -10,23 +10,23 @@
     <form>
         <div>
             <label for="address">Address:</label>
-            @Html.TextBoxFor(property => property.address, new { @type = "text", @size = "40", @placeholder = "99 Strawberry Lane", @required = "true" })
+            @Html.TextBoxFor(property => property.Address, new { @type = "text", @size = "40", @placeholder = "99 Strawberry Lane", @required = "true" })
         </div>
         <div>
             <label for="description">Description:</label>
-            @Html.TextBoxFor(property => property.description, new { @type = "text", @size = "40", @placeholder = "Penthouse with a view", @required = "true" })
+            @Html.TextBoxFor(property => property.Description, new { @type = "text", @size = "40", @placeholder = "Penthouse with a view", @required = "true" })
         </div>
         <div>
             <label for="surface">Surface Area (m2):</label>
-            @Html.TextBoxFor(property => property.surface, new { @type = "text", @size = "40", @placeholder = "107.4", @required = "true" })
+            @Html.TextBoxFor(property => property.Surface, new { @type = "text", @size = "40", @placeholder = "107.4", @required = "true" })
         </div>
         <div>
             <label for="services">Services:</label>
-            @Html.TextBoxFor(property => property.services, new { @type = "text", @size = "40", @placeholder = "Wi-Fi, Laundry, Pool", @required = "true" })
+            @Html.TextBoxFor(property => property.Services, new { @type = "text", @size = "40", @placeholder = "Wi-Fi, Laundry, Pool", @required = "true" })
         </div>
-        @Html.HiddenFor(property => property.descriptions.englishDescription)
-        @Html.HiddenFor(property => property.descriptions.italianDescription)
-        @Html.HiddenFor(property => property.descriptions.polishDescription)
+        @Html.HiddenFor(property => property.EnglishDescription)
+        @Html.HiddenFor(property => property.ItalianDescription)
+        @Html.HiddenFor(property => property.PolishDescription)
         <div>
             <input type="submit" value="Submit" />
         </div>

@@ -10,22 +10,22 @@
 
 <div>
     <b>Address: </b>
-    @Html.ActionLink(@Model.property.address, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 1 })
+    @Html.ActionLink(@Model.property.Address, "UpdateProperty", "Home", new { propertyID = Model.property.Id, index = 1 })
     <hr />
 </div>
 <div>
     <b>Description: </b>
-    @Html.ActionLink(@Model.property.description, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 2 })
+    @Html.ActionLink(@Model.property.Description, "UpdateProperty", "Home", new { propertyID = Model.property.Id, index = 2 })
     <hr />
 </div>
 <div>
     <b>Surface Area (m2): </b>
-    @Html.ActionLink(@Model.property.surface.ToString(), "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 3 })
+    @Html.ActionLink(@Model.property.Surface.ToString(), "UpdateProperty", "Home", new { propertyID = Model.property.Id, index = 3 })
     <hr />
 </div>
 <div>
     <b>Services: </b>
-    @Html.ActionLink(@Model.property.services, "UpdateProperty", "Home", new { propertyID = Model.property.propertyID, index = 4 })
+    @Html.ActionLink(@Model.property.Services, "UpdateProperty", "Home", new { propertyID = Model.property.Id, index = 4 })
     <hr />
 </div>
 

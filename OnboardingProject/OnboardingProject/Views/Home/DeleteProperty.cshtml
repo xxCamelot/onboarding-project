@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.List<PropertyModel>
+﻿@model System.Collections.Generic.List<PropertyDataModel>
 
 @{
     ViewData["Title"] = "Delete existing Property";
@@ -11,7 +11,7 @@
 @foreach (var item in Model)
 {
     <div>
-        @Html.ActionLink(item.address, "DeleteConfirmation", "Home", new { ID = item.propertyID , index = 1})
+        @Html.ActionLink(item.Address, "DeleteConfirmation", "Home", new { ID = item.Id , index = 1})
         <hr />
     </div>
 }
