@@ -1,12 +1,15 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using OnboardingProject.Models;
 
 namespace OnboardingProject.Controllers
 {
     public partial class PropertyDBContext : DbContext
     {
         public virtual DbSet<PropertyDataModel> Property { get; set; }
+
+        public virtual DbSet<RoomDataModel> Room { get; set; }
 
         public PropertyDBContext(DbContextOptions<PropertyDBContext> options) : base(options) { }
 

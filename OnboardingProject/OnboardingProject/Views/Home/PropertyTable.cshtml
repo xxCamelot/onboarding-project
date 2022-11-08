@@ -36,9 +36,9 @@
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
-                                if (item.propertyID == property.Id)
+                                if (item.PropertyId == property.Id)
                                 {
-                                    <li>@Html.ActionLink(@item.description, "UpdateRoom", "Home", new { roomID = item.roomID, index = 1 })</li>
+                                    <li>@Html.ActionLink(@item.Description, "UpdateRoom", "Home", new { roomID = item.Id, index = 1 })</li>
                                 }
                             }
                         </ul>
@@ -47,9 +47,9 @@
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
-                                if (item.propertyID == property.Id)
+                                if (item.PropertyId == property.Id)
                                 {
-                                    <li>@Html.ActionLink(@item.surface.ToString(), "UpdateRoom", "Home", new { roomID = item.roomID, index = 3 })</li>
+                                    <li>@Html.ActionLink(@item.Surface.ToString(), "UpdateRoom", "Home", new { roomID = item.Id, index = 3 })</li>
                                 }
                             }
                         </ul>
@@ -58,9 +58,9 @@
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
-                                if (item.propertyID == property.Id)
+                                if (item.PropertyId == property.Id)
                                 {
-                                    <li>@Html.ActionLink(@item.beds.ToString(), "UpdateRoom", "Home", new { roomID = item.roomID, index = 2 })</li>
+                                    <li>@Html.ActionLink(@item.Beds.ToString(), "UpdateRoom", "Home", new { roomID = item.Id, index = 2 })</li>
                                 }
                             }
                         </ul>
@@ -69,9 +69,9 @@
                         <ul class="list-unstyled">
                             @foreach (var item in Model.rooms)
                             {
-                                if (item.propertyID == property.Id)
+                                if (item.PropertyId == property.Id)
                                 {
-                                    <li>@Html.ActionLink("X", "DeleteConfirmation", "Home", new { ID = item.roomID, index = 2 })</li>
+                                    <li>@Html.ActionLink("X", "DeleteConfirmation", "Home", new { ID = item.Id, index = 2 })</li>
                                 }
                             }
                         </ul>

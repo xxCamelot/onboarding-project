@@ -1,4 +1,4 @@
-﻿@model RoomModel
+﻿@model RoomDataModel
 
 @{
     ViewData["Title"] = "Room Description";
@@ -10,16 +10,16 @@
 
 <div>
     <b>Description: </b>
-    @Html.ActionLink(@Model.description, "UpdateRoom", "Home", new { roomID = Model.roomID, index = 1 })
+    @Html.ActionLink(@Model.Description, "UpdateRoom", "Home", new { roomID = Model.Id, index = 1 })
     <hr />
 </div>
 <div>
     <b>Beds: </b>
-    @Html.ActionLink(@Model.beds.ToString(), "UpdateRoom", "Home", new { roomID = Model.roomID, index = 2 })
+    @Html.ActionLink(@Model.Beds.ToString(), "UpdateRoom", "Home", new { roomID = Model.Id, index = 2 })
     <hr />
 </div>
 <div>
     <b>Surface (m2): </b>
-    @Html.ActionLink(@Model.surface.ToString(), "UpdateRoom", "Home", new { roomID = Model.roomID, index = 3 })
+    @Html.ActionLink(@Model.Surface.ToString(), "UpdateRoom", "Home", new { roomID = Model.Id, index = 3 })
     <hr />
 </div>

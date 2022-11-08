@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.List<RoomModel>
+﻿@model System.Collections.Generic.List<RoomDataModel>
 
 @{
     ViewData["Title"] = "Delete existing Room";
@@ -11,7 +11,7 @@
 @foreach (var item in Model)
 {
     <div>
-        @Html.ActionLink(item.description, "DeleteConfirmation", "Home", new { ID = item.roomID, index = 2 })
+        @Html.ActionLink(item.Description, "DeleteConfirmation", "Home", new { ID = item.Id, index = 2 })
         <hr />
     </div>
 }

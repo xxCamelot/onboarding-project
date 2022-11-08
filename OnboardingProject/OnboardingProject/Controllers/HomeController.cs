@@ -76,25 +76,26 @@ namespace OnboardingProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRoomSurveyMethod([FromForm] RoomModel room)
+        public IActionResult AddRoomSurveyMethod([FromForm] RoomDataModel room)
         {
-            room.descriptions.englishDescription = "[N/A]";
-            room.descriptions.italianDescription = "[N/A]";
-            room.descriptions.polishDescription = "[N/A]";
-            room.propertyID = StaticData.propertyAddedTo;
+            room.EnglishDescription = "[N/A]";
+            room.ItalianDescription = "[N/A]";
+            room.PolishDescription = "[N/A]";
+            room.PropertyId = StaticData.propertyAddedTo;
             switch (StaticData.activeLanguage)
             {
                 case StaticData.Language.English:
-                    room.descriptions.englishDescription = room.description;
+                    room.EnglishDescription = room.Description;
                     break;
                 case StaticData.Language.Italian:
-                    room.descriptions.italianDescription = room.description;
+                    room.ItalianDescription = room.Description;
                     break;
                 case StaticData.Language.Polish:
-                    room.descriptions.polishDescription = room.description;
+                    room.PolishDescription = room.Description;
                     break;
             }
-            StaticData.roomList.Add(room);
+            propertyDBContext.Room.Add(room);
+            propertyDBContext.SaveChanges();
             return RedirectToAction("ListProperties");
         }
 
@@ -107,42 +108,35 @@ namespace OnboardingProject.Controllers
         [HttpPost]
         public IActionResult UpdatePropertyMethod([FromForm] UpdateModel updated)
         {
-            
             switch (updated.index)
             {
                 case 1:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Address = updated.value;
-                    propertyDBContext.SaveChanges();
                     break;
                 case 2:
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).EnglishDescription = updated.value;
-                            propertyDBContext.SaveChanges();
                             break;
                         case StaticData.Language.Italian:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).ItalianDescription = updated.value;
-                            propertyDBContext.SaveChanges();
                             break;
                         case StaticData.Language.Polish:
                             propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).PolishDescription = updated.value;
-                            propertyDBContext.SaveChanges();
                             break;
                     }
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Description = updated.value;
-                    propertyDBContext.SaveChanges();
                     break;
                 case 3:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Surface = Convert.ToDouble(updated.value);
-                    propertyDBContext.SaveChanges();
                     break;
                 case 4:
                     propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID).Services = updated.value;
-                    propertyDBContext.SaveChanges();
                     break;
             }
-            
+            propertyDBContext.Update(propertyDBContext.Property.FirstOrDefault(x => x.Id == updated.ID));
+            propertyDBContext.SaveChanges();
             return RedirectToAction("ListProperties");
         }
 
@@ -162,24 +156,26 @@ namespace OnboardingProject.Controllers
                     switch (StaticData.activeLanguage)
                     {
                         case StaticData.Language.English:
-                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.englishDescription = updated.value;
+                            propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).EnglishDescription = updated.value;
                             break;
                         case StaticData.Language.Italian:
-                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.italianDescription = updated.value;
+                            propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).ItalianDescription = updated.value;
                             break;
                         case StaticData.Language.Polish:
-                            StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).descriptions.polishDescription = updated.value;
+                            propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).PolishDescription = updated.value;
                             break;
                     }
-                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).description = updated.value;
+                    propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).Description = updated.value;
                     break;
                 case 2:
-                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).beds = Convert.ToInt32(updated.value);
+                    propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).Beds = Convert.ToInt32(updated.value);
                     break;
                 case 3:
-                    StaticData.roomList.Find(room => room.roomID.Equals(updated.ID)).surface = Convert.ToDouble(updated.value);
+                    propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID).Surface = Convert.ToDouble(updated.value);
                     break;
             }
+            propertyDBContext.Update(propertyDBContext.Room.FirstOrDefault(x => x.Id == updated.ID));
+            propertyDBContext.SaveChanges();
             return RedirectToAction("ListProperties");
         }
 
@@ -192,11 +188,12 @@ namespace OnboardingProject.Controllers
                     foreach(var item in propertyDBContext.Property)
                     {
                         item.Description = item.EnglishDescription;
-                        propertyDBContext.SaveChanges();
+                        propertyDBContext.Update(item); 
                     }
-                    foreach(var item in StaticData.roomList)
+                    foreach(var item in propertyDBContext.Room)
                     {
-                        item.description = item.descriptions.englishDescription;
+                        item.Description = item.EnglishDescription;
+                        propertyDBContext.Update(item);
                     }
                     break;
                 case 1:
@@ -204,11 +201,12 @@ namespace OnboardingProject.Controllers
                     foreach (var item in propertyDBContext.Property)
                     {
                         item.Description = item.ItalianDescription;
-                        propertyDBContext.SaveChanges();
+                        propertyDBContext.Update(item);
                     }
-                    foreach (var item in StaticData.roomList)
+                    foreach (var item in propertyDBContext.Room)
                     {
-                        item.description = item.descriptions.italianDescription;
+                        item.Description = item.ItalianDescription;
+                        propertyDBContext.Update(item);
                     }
                     break;
                 case 2:
@@ -216,14 +214,16 @@ namespace OnboardingProject.Controllers
                     foreach (var item in propertyDBContext.Property)
                     {
                         item.Description = item.PolishDescription;
-                        propertyDBContext.SaveChanges();
+                        propertyDBContext.Update(item);
                     }
-                    foreach (var item in StaticData.roomList)
+                    foreach (var item in propertyDBContext.Room)
                     {
-                        item.description = item.descriptions.polishDescription;
+                        item.Description = item.PolishDescription;
+                        propertyDBContext.Update(item);
                     }
                     break;
             }
+            propertyDBContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -236,14 +236,14 @@ namespace OnboardingProject.Controllers
         {
             PropertyDataModel property = propertyDBContext.Property.FirstOrDefault(x => x.Id == propertyID);
 
-            List<RoomModel> tempRoomList = new List<RoomModel>();
-            foreach (var item in StaticData.roomList)
+            List<RoomDataModel> tempRoomList = new List<RoomDataModel>();
+            foreach (var item in propertyDBContext.Room)
             {
-                if(item.propertyID == property.Id) {
+                if(item.PropertyId == property.Id) {
                     tempRoomList.Add(item);
                 }
             }
-            RoomModel[] rooms = tempRoomList.ToArray();
+            RoomDataModel[] rooms = tempRoomList.ToArray();
 
             PropertyDescriptionModel descriptionPackage = new PropertyDescriptionModel(property, rooms);
 
@@ -252,7 +252,7 @@ namespace OnboardingProject.Controllers
 
         public IActionResult RoomDescription(int roomID)
         {
-            RoomModel room = StaticData.roomList.Find(room => room.roomID.Equals(roomID));
+            RoomDataModel room = propertyDBContext.Room.FirstOrDefault(x => x.Id == roomID);
             return View(room);
         }
 
@@ -268,10 +268,10 @@ namespace OnboardingProject.Controllers
 
         public IActionResult DeleteRoomList(int propertyID)
         {
-            List<RoomModel> tempRoomList = new List<RoomModel>();
-            foreach (var item in StaticData.roomList)
+            List<RoomDataModel> tempRoomList = new List<RoomDataModel>();
+            foreach (var item in propertyDBContext.Room)
             {
-                if (item.propertyID == propertyID)
+                if (item.PropertyId == propertyID)
                 {
                     tempRoomList.Add(item);
                 }
@@ -285,12 +285,14 @@ namespace OnboardingProject.Controllers
             {
                 case 1:
                     propertyDBContext.Property.Remove(propertyDBContext.Property.FirstOrDefault(x => x.Id == ID));
-                    propertyDBContext.SaveChanges();
+                    propertyDBContext.Update(propertyDBContext.Property.FirstOrDefault(x => x.Id == ID));
                     break;
                 case 2:
-                    StaticData.roomList.Remove(StaticData.roomList.Find(room => room.roomID.Equals(ID)));
+                    propertyDBContext.Room.Remove(propertyDBContext.Room.FirstOrDefault(x => x.Id == ID));
+                    propertyDBContext.Update(propertyDBContext.Room.FirstOrDefault(x => x.Id == ID));
                     break;
             }
+            propertyDBContext.SaveChanges();
             return View();
         }
 
@@ -298,7 +300,7 @@ namespace OnboardingProject.Controllers
 
         public IActionResult PropertyTable()
         {
-            TableModel tablePackage = new TableModel(propertyDBContext.Property.ToArray(), StaticData.roomList.ToArray());
+            TableModel tablePackage = new TableModel(propertyDBContext.Property.ToArray(), propertyDBContext.Room.ToArray());
             return View(tablePackage);
         }
 

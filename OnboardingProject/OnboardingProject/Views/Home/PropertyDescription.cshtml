@@ -34,7 +34,7 @@
 @foreach(var item in Model.rooms)
 {
     <div>
-        @Html.ActionLink(item.description, "RoomDescription", "Home", new { roomID = item.roomID })
+        @Html.ActionLink(item.Description, "RoomDescription", "Home", new { roomID = item.Id })
         <hr />
     </div>
 
